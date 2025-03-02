@@ -1,9 +1,13 @@
 import discord  # 모듈 불러오기
 import os
 from keep_alive import keep_alive
+from dotenv import load_dotenv
 
-TOKEN = "MTM0NTU5MTg3MDQ5MDgwNDI4NA.GjD7i_.JFi02GX7cX-GwheKXVKuvo0kQ8GuCOZC1xZZjg"  # 본인의 토큰을 여기에 넣어주세요.
+load_dotenv(verbose=True)
+
 CHANNEL_ID = '1343588295820443678'
+
+TOKEN = os.getenv("DISCORD_TOKEN")
 
 class MyClient(discord.Client):
     async def on_ready(self):  # 봇이 준비되었을 때 실행되는 이벤트
