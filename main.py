@@ -22,6 +22,7 @@ async def on_message(message):
         cmd = message.content[1:]
         if cmd.startswith("안녕"):
             await message.channel.send("안녕하세요")
+            await message.add_reaction("👍")
         elif cmd.startswith("이름"):
             await message.channel.send("jangjinone bot")
         else:
