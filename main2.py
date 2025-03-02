@@ -2,7 +2,11 @@ import discord
 from discord.ext import commands
 import asyncio
 import os
+
+from dotenv import load_dotenv
 from keep_alive import keep_alive
+
+load_dotenv(verbose=True)
 
 # 학살단 서버 아이디
 HK_GUILD_ID = 1247959509201326190
@@ -27,6 +31,8 @@ async def detect_hk_members(interaction: discord.Interaction):
 
     # 자신의 서버 가져오기
     guild = interaction.guild
+    await guild.chunk()
+
     if not guild:
         await interaction.response.send_message("❌ 현재 서버를 찾을 수 없습니다.", ephemeral=True)
         return
@@ -37,6 +43,11 @@ async def detect_hk_members(interaction: discord.Interaction):
     try:
         # 모든 멤버를 순차적으로 확인
         for member in guild.members:
+            print(f"member:{member}")
+            print(f"mutual_guilds:{member.mutual_guilds}")
+
+            member = await guild.fetch_member(member.id)
+            
             # 해당 멤버가 HK 서버에 가입되어 있는지 확인
             if HK_GUILD_ID in [guild.id for guild in member.mutual_guilds]:
                 hk_members_in_server.append(member.name)
