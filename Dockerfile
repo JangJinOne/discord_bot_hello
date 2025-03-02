@@ -3,4 +3,4 @@ WORKDIR /bot
 COPY requirements.txt /bot/
 RUN pip install -r requirements.txt
 COPY . /bot
-CMD python main.py
+CMD nohup python main.py > nohub_log.log 2>&1 &
