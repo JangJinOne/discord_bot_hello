@@ -1,5 +1,3 @@
-Dockerfile
-
 FROM python:3.11
 WORKDIR /bot
 COPY requirements.txt /bot/
