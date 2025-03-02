@@ -1,6 +1,7 @@
 import discord  # 모듈 불러오기
 import os
 from dotenv import load_dotenv
+from keep_alive import keep_alive
 
 load_dotenv(verbose=True)
 
@@ -24,4 +25,5 @@ async def on_message(message):
         else:
             await message.channel.send("안녕 <-- 이라고 치시면 안녕하세요라고 합니다.")
 
+keep_alive()
 client.run(os.getenv("DISCORD_TOKEN"))  # 봇 실행
