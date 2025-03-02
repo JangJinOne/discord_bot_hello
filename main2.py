@@ -75,4 +75,4 @@ async def sync_commands(interaction: discord.Interaction):
 
 # ✅ 봇 실행
 keep_alive()
-bot.run(os.getenv("DISCORD_TOKEN"))
+bot.run(os.getenv("DISCORD_TOKEN2"))
