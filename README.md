@@ -5,7 +5,9 @@ Python 버전 discord hello 봇
 * Editor: Visual Studio Code
 * Source Repository: GitHub
 * Deploy & Hosting: Render
-* Keep Alive: UptimeRobot
+* Ping & keep_alive: GitHub Actions
+* Health check: UptimeRobot
+
 
 # Usage
 Type a command string after command prefix "!"
