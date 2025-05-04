@@ -1,6 +1,7 @@
 import discord  # 모듈 불러오기
 import os
 import random
+import asyncio  # 추가된 모듈
 from dotenv import load_dotenv
 from keep_alive import keep_alive
 
@@ -34,18 +35,26 @@ async def on_message(message):
             await message.channel.send("jangjinone bot")
 
         elif cmd.startswith("로또"):
-            lucky_number = random.randint(1, 45)  # 행운의 숫자 (1~45 사이)
-            random_numbers = random.sample(range(1, 46), 3)  # 3개의 랜덤 숫자
+            lucky_number = random.randint(1, 45)
+            random_numbers = random.sample(range(1, 46), 3)
 
-            result_msg = f"🎰 행운의 숫자: **{lucky_number}**\n" \
-                         f"🔢 당신의 숫자: {random_numbers}\n"
+            await message.channel.send("🎰 행운의 숫자를 뽑고 있습니다...")
+            await asyncio.sleep(1)
+
+            await message.channel.send("🔢 당신의 숫자를 하나씩 공개합니다...")
+            for i, num in enumerate(random_numbers, start=1):
+                await asyncio.sleep(1.5)
+                await message.channel.send(f"{i}번 숫자: **{num}**")
+
+            await asyncio.sleep(1.5)
+            await message.channel.send(f"🎰 행운의 숫자: **{lucky_number}**")
 
             if lucky_number in random_numbers:
-                result_msg += "🎉 당첨! 🎉"
+                await asyncio.sleep(0.5)
+                await message.channel.send("🎉 당첨! 🎉")
             else:
-                result_msg += "😢 아쉽지만 다음 기회에!"
-
-            await message.channel.send(result_msg)
+                await asyncio.sleep(0.5)
+                await message.channel.send("😢 아쉽지만 다음 기회에!")
 
         elif cmd.startswith("가르치기"):
             # !가르치기 [명령어] [응답] 형식으로 처리
